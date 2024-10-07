@@ -38,7 +38,7 @@ class Pi5Neo:
 
     def send_spi_data(self):
         """Send the raw data buffer to the NeoPixel strip via SPI"""
-        spi_message = bytes(self.raw_data)
+        spi_message = bytes([0] + self.raw_data) # send some 0 byte(s) to mitigate errors in first LED
         self.spi.xfer3(list(spi_message))  #previously spi.xfer2
 
     def bitmask(self, byte, position):
